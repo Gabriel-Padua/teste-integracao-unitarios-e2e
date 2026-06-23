@@ -1,0 +1,45 @@
+{
+  "name": "curso-testes",
+  "version": "1.0.0",
+  "description": "Curso de Testes Automatizados para APIs (Alura)",
+  "license": "ISC",
+  "author": "Thiago R. V. Martins",
+  "type": "module",
+  "main": "index.js",
+  "imports": {
+    "#config/*.js": "./src/config/*.js",
+    "#controllers/*.js": "./src/controllers/*.js",
+    "#db/*.js": "./src/db/*.js",
+    "#models/*.js": "./src/models/*.js",
+    "#domain/*.js": "./src/domain/*.js",
+    "#services/*.js": "./src/services/*.js",
+    "#test/factories/*.js": "./test/factories/*.js",
+    "#test/utils/*.js": "./test/utils/*.js",
+    "#routes/*.js": "./src/routes/*.js",
+    "#src/*.js": "./src/*.js"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/server.js",
+    "start:watch": "node --env-file=.env --watch src/server.js",
+    "test:int:all": "node --env-file=.env.test --test --test-concurrency=1 \"test/int/**/*.int-spec.js\"",
+    "test:unit:all": "node --env-file=.env.test --test \"test/unit/**/*.spec.js\"",
+    "test:e2e:all": "node --env-file=.env.test --test --test-concurrency=1 \"test/e2e/**/*.e2e-spec.js\"",
+    "test:e2e": "node --env-file=.env.test --test --test-concurrency=1",
+    "exec": "node --env-file=.env src/commands/execute.js"
+  },
+  "packageManager": "npm@11.11.0+sha512.f36811c4aae1fde639527368ae44c571d050006a608d67a191f195a801a52637a312d259186254aa3a3799b05335b7390539cf28656d18f0591a1125ba35f973",
+  "devDependencies": {
+    "@eslint/js": "9.39.3",
+    "@types/supertest": "7.2.0",
+    "eslint": "9.39.3",
+    "globals": "17.4.0",
+    "supertest": "^7.2.2"
+  },
+  "dependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "25.3.5",
+    "express": "5.2.1",
+    "knex": "3.1.0",
+    "pg": "8.20.0"
+  }
+}

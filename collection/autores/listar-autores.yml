@@ -1,0 +1,24 @@
+info:
+  name: listar-autores
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/autores"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: baseUrl
+      value: http://localhost:3000
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
