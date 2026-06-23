@@ -43,7 +43,7 @@ jobs:
           POSTGRES_PASSWORD: root
           POSTGRES_DB: livraria
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
@@ -51,7 +51,7 @@ jobs:
           --health-retries=5
     env:
       NODE_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/livraria
+      DATABASE_URL: postgres://postgres:postgres@localhost:5433/livraria
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js LTS Version
@@ -62,7 +62,7 @@ jobs:
       - run: npm ci
       - name: Inicializar banco de dados
         env:
-          PGPASSWORD: postgres
+          PGPASSWORD: root
         run: |
           psql -h localhost -U postgres -d livraria -f docker/init/01-create-tables.sql
           psql -h localhost -U postgres -f docker/init/02-create-test-db.sql
