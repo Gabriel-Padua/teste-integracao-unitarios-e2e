@@ -51,7 +51,7 @@ jobs:
           --health-retries=5
     env:
       NODE_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@localhost:5433/livraria
+      DATABASE_URL: postgres://postgres:root@localhost:5433/livraria
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js LTS Version
@@ -60,12 +60,21 @@ jobs:
           node-version-file: .node-version
           cache: "npm"
       - run: npm ci
+      - name: Esperar PostgreSQL
+        env:
+          PGPASSWORD: root
+        run: |
+          until pg_isready -h localhost -p 5433 -U postgres; do
+            echo "Aguardando Postgres..."
+            sleep 2
+          done
+        
       - name: Inicializar banco de dados
         env:
           PGPASSWORD: root
         run: |
-          psql -h localhost -U postgres -d livraria -f docker/init/01-create-tables.sql
-          psql -h localhost -U postgres -f docker/init/02-create-test-db.sql
+          psql -h localhost -p 5433 -U postgres -d livraria -f docker/init/01-create-tables.sql
+          psql -h localhost -p 5433 -U postgres -f docker/init/02-create-test-db.sql
       - run: env > .env.test
       - run: npm run test:int:all
       - run: npm run test:e2e:all
