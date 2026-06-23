@@ -41,12 +41,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
-      DATABASE_URL: postgres://postgres:root@localhost:5433/livraria
+      DATABASE_URL: postgres://postgres:root@localhost:5432/livraria
     services:
       postgres:
         image: postgres:18
         ports:
-          - "5433:5432"
+          - "5432:5432"
 
         env:
           POSTGRES_DB: livraria
