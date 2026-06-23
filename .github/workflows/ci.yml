@@ -43,7 +43,7 @@ jobs:
           POSTGRES_PASSWORD: root
           POSTGRES_DB: livraria
         ports:
-          - 5433:5432
+          - 5432:5432
         options: >-
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
@@ -51,7 +51,7 @@ jobs:
           --health-retries=5
     env:
       NODE_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@localhost:5433/livraria
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/livraria
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js LTS Version
