@@ -22,7 +22,7 @@ jobs:
           node-version-file: .node-version
           cache: "npm"
       - run: npm ci
-      - run: npm run lint
+      - run: npm run lint:check
 
   test-unit:
     runs-on: ubuntu-latest
